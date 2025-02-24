@@ -25,14 +25,14 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/nhan_vien.xml',
-        'views/phong_ban.xml',
-        'views/chuc_vu.xml',
-        'views/lich_su_cong_tac.xml',
+        'views/project_view.xml',
+        'views/task_view.xml',
+        'views/employee_view.xml',
         'views/menu.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
     ],
+    'application': True,
 }

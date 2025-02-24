@@ -28,6 +28,7 @@
         'views/nhan_vien.xml',
         'views/phong_ban.xml',
         'views/chuc_vu.xml',
+        'views/chung_chi.xml',
         'views/lich_su_cong_tac.xml',
         'views/menu.xml',
     ],
