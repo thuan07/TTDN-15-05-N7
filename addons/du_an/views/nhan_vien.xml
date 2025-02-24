@@ -37,8 +37,6 @@
             </field>
         </record>
 
-<<<<<<< HEAD
-=======
         
         <!-- <record model="ir.ui.view" id="nhan_vien_search">
             <field name="model">nhan_vien</field>
@@ -59,7 +57,6 @@
             </field>
         </record>
              -->
->>>>>>> 2c47d3939 (add file)
         <record model="ir.ui.view" id="nhan_vien_search">
             <field name="model">nhan_vien</field>
             <field name="arch" type="xml">

@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="student_absert_search">
+            <field name="model">student_absert</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="student_id">
+                    <field name="full_name">
+                        <searchpanel>
+                            <field name="student_cohart_id" select="multi"/>
+                            <field name="student_class_id" select="multi"/>
+                            <field name="day" select="multi"/>
+                            <field name="month" select="multi"/>
+                            <field name="year" select="multi"/>
+                        </searchpanel>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

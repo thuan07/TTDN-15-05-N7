@@ -67,3 +67,9 @@ python3 odoo-bin.py -c odoo.conf -u all
 ```
 
 Người sử dụng truy cập theo đường dẫn _http://localhost:8069/_ để đăng nhập vào hệ thống.
+<<<<<<< HEAD
+=======
+
+Hoàn tất
+    
+>>>>>>> 2c47d3939 (add file)
