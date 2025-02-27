@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_project_dashboard" model="ir.ui.view">
+            <field name="name">project_management_dashboard</field>
+            <field name="model">project_management</field>
+            <field name="arch" type="xml">
+                <form string="Dashboard Dự Án">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="status"/>
+                        </group>
+                        <group>
+                            <field name="total_tasks" readonly="1"/>
+                            <field name="done_tasks" readonly="1"/>
+                            <field name="progress" widget="progressbar"/>
+                        </group>
+                        <notebook>
+                            <page string="Danh sách nhiệm vụ">
+                                <field name="task_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="status"/>
+                                        <field name="deadline"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_project_dashboard" model="ir.actions.act_window">
+            <field name="name">Dashboard Dự Án</field>
+            <field name="res_model">project_management</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_project_dashboard"/>
+        </record>
+
+        <menuitem id="menu_project_dashboard" name="Dashboard Dự Án"
+                  action="action_project_dashboard" parent="base.menu_management"/>
+    </data>
+</odoo>

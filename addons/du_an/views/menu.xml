@@ -1,33 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <menuitem 
-            id="menu_project_root" 
-            name="Quản lý Dự Án" 
-            sequence="0"/>
+        <menuitem
+            id="menu_project_root"
+            name="Quản lý Dự Án"
+            sequence="0" />
 
-        <menuitem 
-            id="menu_project" 
-            name="Quản lý Dự án" 
-            parent="menu_project_root" 
-            sequence="1" 
+        <menuitem
+            id="menu_project"
+            name="Quản lý Dự án"
+            parent="menu_project_root"
+            sequence="1"
             action="action_project"
         />
 
-        <menuitem 
-            id="menu_task" 
-            name="Quản lý Công việc" 
-            parent="menu_project_root" 
-            sequence="1" 
+        <menuitem
+            id="menu_task"
+            name="Quản lý Công việc"
+            parent="menu_project_root"
+            sequence="1"
             action="action_task"
         />
 
-        <menuitem 
-            id="menu_employee" 
-            name="Quản lý Nhân viên" 
-            parent="menu_project_root" 
-            sequence="1" 
+        <menuitem
+            id="menu_employee"
+            name="Quản lý Nhân viên"
+            parent="menu_project_root"
+            sequence="1"
             action="nhan_su.action_nhan_vien"
+        />
+
+        <record id="action_project_dashboard" model="ir.actions.act_window">
+            <field name="name">Dashboard Dự Án</field>
+            <field name="res_model">project_management</field>
+            <field name="view_mode">kanban,graph,pivot</field>
+        </record>
+
+        <menuitem
+            id="menu_project_dashboard"
+            name="Dashboard Dự Án"
+            parent="menu_project_root"
+            sequence="1"
+            action="action_project_dashboard"
+        />
+
+        <record id="action_project_log" model="ir.actions.act_window">
+            <field name="name">Nhật ký hoạt động</field>
+            <field name="res_model">project_log</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem 
+            id="menu_project_log" 
+            name="Nhật ký hoạt động" 
+            parent="menu_project_root"
+            sequence="1" 
+            action="action_project_log" 
         />
     </data>
 </odoo>

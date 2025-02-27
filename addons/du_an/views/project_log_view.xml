@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <record id="view_project_log_tree" model="ir.ui.view">
+            <field name="name">project_log</field>
+            <field name="model">project_log</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="date"/>
+                    <field name="project_id"/>
+                    <field name="task_id"/>
+                    <field name="user_id"/>
+                    <field name="action"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_project_log_form" model="ir.ui.view">
+            <field name="name">project_log</field>
+            <field name="model">project_log</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="date"/>
+                            <field name="project_id"/>
+                            <field name="task_id"/>
+                            <field name="user_id"/>
+                            <field name="action"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
