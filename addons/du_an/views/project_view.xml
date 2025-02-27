@@ -3,8 +3,8 @@
     <data>
         <!-- Form View -->
         <record id="view_project_form" model="ir.ui.view">
-            <field name="name">project_management_form</field>
-            <field name="model">project.management</field>
+            <field name="name">project_management</field>
+            <field name="model">project_management</field>
             <field name="arch" type="xml">
                 <form>
                     <sheet>
@@ -29,8 +29,8 @@
 
         <!-- Tree View -->
         <record id="view_project_tree" model="ir.ui.view">
-            <field name="name">project_management_tree</field>
-            <field name="model">project.management</field>
+            <field name="name">project_management</field>
+            <field name="model">project_management</field>
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
@@ -44,7 +44,7 @@
 
         <!-- Search View -->
         <record model="ir.ui.view" id="project_management_search">
-            <field name="model">project.management</field>
+            <field name="model">project_management</field>
             <field name="arch" type="xml">
                 <search>
                     <field name="name"/>
@@ -57,7 +57,7 @@
         <!-- Action -->
         <record id="action_project" model="ir.actions.act_window">
             <field name="name">Dự án</field>
-            <field name="res_model">project.management</field>
+            <field name="res_model">project_management</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="project_management_search"/>
         </record>

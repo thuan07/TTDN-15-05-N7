@@ -1,7 +1,7 @@
 from odoo import models, fields
 
 class Project(models.Model):
-    _name = 'project.management'
+    _name = 'project_management'
     _description = 'Quản lý dự án'
 
     name = fields.Char(string="Tên dự án", required=True)
@@ -14,5 +14,5 @@ class Project(models.Model):
         ('completed', 'Hoàn thành')
     ], string="Trạng thái", default='draft')
 
-    employee_ids = fields.Many2many("project.employee", string="Nhân viên tham gia")  
-    task_ids = fields.One2many("project.task", "project_id", string="Danh sách nhiệm vụ")
+    employee_ids = fields.Many2many("nhan_vien", string="Nhân viên tham gia")
+    task_ids = fields.One2many("project_task", "project_id", string="Danh sách nhiệm vụ")

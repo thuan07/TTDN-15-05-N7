@@ -37,29 +37,6 @@
             </field>
         </record>
 
-<<<<<<< HEAD
-=======
-        
-        <!-- <record model="ir.ui.view" id="nhan_vien_search">
-            <field name="model">nhan_vien</field>
-            <field name="arch" type="xml">
-                <search>
-                    <field name="ma_dinh_danh">
-                    <field name="ngay_sinh">
-                    <field name="que_quan">
-                    <field name="email">
-                        <searchpanel>
-                            <field name="ma_dinh_danh" select="multi"/>
-                            <field name="email" select="multi"/>
-                            <field name="day" select="multi"/>
-                            <field name="month" select="multi"/>
-                            <field name="year" select="multi"/>
-                        </searchpanel>
-                </search>
-            </field>
-        </record>
-             -->
->>>>>>> 2c47d3939 (add file)
         <record model="ir.ui.view" id="nhan_vien_search">
             <field name="model">nhan_vien</field>
             <field name="arch" type="xml">

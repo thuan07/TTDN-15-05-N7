@@ -1,6 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_project_management_user,access.project.management,model_project_management,base.group_user,1,1,1,0
-access_project_management_manager,access.project.management.manager,model_project_management,base.group_system,1,1,1,1
-access_project_task_user,access.project.task,model_project_task,base.group_user,1,1,1,0
-access_project_task_manager,access.project.task.manager,model_project_task,base.group_system,1,1,1,1
-access_project_employee,access.project.employee,model_project_employee,,1,1,1,1
+access_project_management,access project_management,du_an.model_project_management,base.group_user,1,1,1,1
+access_project_task,access project_task,du_an.model_project_task,base.group_user,1,1,1,1

@@ -3,8 +3,8 @@
     <data>
         <!-- Form View -->
         <record id="view_task_form" model="ir.ui.view">
-            <field name="name">project_task_form</field>
-            <field name="model">project.task</field>
+            <field name="name">project_task</field>
+            <field name="model">project_task</field>
             <field name="arch" type="xml">
                 <form>
                     <sheet>
@@ -12,8 +12,7 @@
                         <group col="4" string="Chi tiết nhiệm vụ">
                             <field name="name"/>
                             <field name="project_id"/>
-                            <field name="assigned_to"/>
-                            <field name="employee_id"/>  <!-- Thêm nhân viên thực hiện -->
+                            <field name="employee_id"/> 
                             <field name="deadline"/>
                             <field name="status"/>
                         </group>
@@ -22,39 +21,34 @@
             </field>
         </record>
 
-        <!-- Tree View -->
         <record id="view_task_tree" model="ir.ui.view">
-            <field name="name">project_task_tree</field>
-            <field name="model">project.task</field>
+            <field name="name">project_task</field>
+            <field name="model">project_task</field>
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
                     <field name="project_id"/>
-                    <field name="assigned_to"/>
-                    <field name="employee_id"/>  <!-- Hiển thị nhân viên thực hiện -->
+                    <field name="employee_id"/>  
                     <field name="deadline"/>
                     <field name="status"/>
                 </tree>
             </field>
         </record>
 
-        <!-- Search View -->
         <record model="ir.ui.view" id="project_task_search">
-            <field name="model">project.task</field>
+            <field name="model">project_task</field>
             <field name="arch" type="xml">
                 <search>
                     <field name="name"/>
                     <field name="status"/>
-                    <field name="assigned_to"/>
-                    <field name="employee_id"/>  <!-- Thêm nhân viên thực hiện -->
+                    <field name="employee_id"/>  
                 </search>
             </field>
         </record>
 
-        <!-- Action -->
         <record id="action_task" model="ir.actions.act_window">
             <field name="name">Nhiệm vụ</field>
-            <field name="res_model">project.task</field>
+            <field name="res_model">project_task</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="project_task_search"/>
         </record>
