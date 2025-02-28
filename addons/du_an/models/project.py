@@ -39,10 +39,19 @@ class Project(models.Model):
 
     log_ids = fields.One2many('project_log', 'project_id', string="Nhật ký hoạt động")
 
-    @api.onchange('status')
-    def _onchange_status(self):
-        if self.status:
-            self.env['project_log'].create({
-                'project_id': self.id,
-                'action': f"Trạng thái dự án thay đổi thành {self.status}",
-            })
+    def write(self, vals):
+        """ Ghi log khi trạng thái dự án thay đổi """
+        if 'status' in vals:
+            for project in self:
+                status_mapping = {
+                'draft': 'Nháp',
+                'in_progress': 'Đang thực hiện',
+                'completed': 'Hoàn thành'
+            }
+            for project in self:
+                new_status = status_mapping.get(vals['status'], 'Không xác định')
+                self.env['project_log'].create({
+                    'project_id': project.id,
+                    'action': f"Trạng thái dự án thay đổi thành {new_status}",
+                })
+        return super(Project, self).write(vals)

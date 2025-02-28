@@ -28,6 +28,7 @@
         'views/project_view.xml',
         'views/task_view.xml',
         'views/menu.xml',
+        'views/project_log_view.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
