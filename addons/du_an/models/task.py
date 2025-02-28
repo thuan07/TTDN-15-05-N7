@@ -17,19 +17,18 @@ class ProjectTask(models.Model):
     log_ids = fields.One2many('project_log', 'task_id', string="Nhật ký hoạt động")
 
     def write(self, vals):
-        """ Ghi log khi trạng thái nhiệm vụ thay đổi """
         if 'status' in vals:
             for project in self:
                 status_mapping = {
-                'draft': 'Nháp',
+                'pending': 'Đang chờ',
                 'in_progress': 'Đang thực hiện',
-                'completed': 'Hoàn thành'
+                'done': 'Hoàn thành'
             }
             for task in self:
-                new_status = status_mapping.get(vals['status'], 'Không xác định')
+                new_status = status_mapping.get(vals.get('status'), 'Không xác định')
                 self.env['project_log'].create({
                     'task_id': task.id,
                     'project_id': task.project_id.id,  # Ghi cả project_id vào log
-                    'action': f"Trạng thái nhiệm vụ thay đổi thành {vals['new_status']}",
+                    'action': f"Trạng thái nhiệm vụ thay đổi thành {new_status}",
                 })
         return super(ProjectTask, self).write(vals)
