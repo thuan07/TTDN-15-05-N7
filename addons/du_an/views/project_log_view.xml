@@ -28,5 +28,11 @@
                 </form>
             </field>
         </record>
+
+        <record id="action_project_log" model="ir.actions.act_window">
+            <field name="name">Nhật ký hoạt động</field>
+            <field name="res_model">project_log</field>
+            <field name="view_mode">tree,form</field>
+        </record>
     </data>
 </odoo>

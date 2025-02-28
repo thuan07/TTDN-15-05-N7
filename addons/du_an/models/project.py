@@ -26,8 +26,7 @@ class Project(models.Model):
                 'draft': 'Nháp',
                 'in_progress': 'Đang thực hiện',
                 'completed': 'Hoàn thành'
-            }
-            for project in self:
+                }
                 new_status = status_mapping.get(vals['status'], 'Không xác định')
                 self.env['project_log'].create({
                     'project_id': project.id,

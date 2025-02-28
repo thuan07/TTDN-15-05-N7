@@ -30,12 +30,6 @@
             action="nhan_su.action_nhan_vien"
         />
 
-        <record id="action_project_log" model="ir.actions.act_window">
-            <field name="name">Nhật ký hoạt động</field>
-            <field name="res_model">project_log</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-
         <menuitem 
             id="menu_project_log" 
             name="Nhật ký hoạt động" 
