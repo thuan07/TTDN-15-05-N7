@@ -1,34 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <!-- Tree View for Project Logs -->
         <record id="view_project_log_tree" model="ir.ui.view">
-            <field name="name">project_log</field>
+            <field name="name">project_log_tree</field>
             <field name="model">project_log</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree string="Nhật ký hoạt động">
                     <field name="date" />
-                    <field name="project_id" widget="many2one" />
-                    <field name="task_id" widget="many2one" />
+                    <field name="project_id" />
+                    <field name="task_id" />
                     <field name="action" />
                 </tree>
             </field>
         </record>
+        
+        <!-- Form View for Project Logs -->
         <record id="view_project_log_form" model="ir.ui.view">
-            <field name="name">project_log</field>
+            <field name="name">project_log_form</field>
             <field name="model">project_log</field>
             <field name="arch" type="xml">
-                <form>
+                <form string="Nhật ký hoạt động">
                     <sheet>
                         <group>
                             <field name="date" />
-                            <field name="project_id" />
-                            <field name="task_id" />
-                            <field name="action" />
                         </group>
+                        <notebook>
+                            <page string="Thông tin chính">
+                                <group>
+                                    <field name="project_id" />
+                                    <field name="task_id" />
+                                </group>
+                            </page>
+                            <page string="Chi tiết hành động">
+                                <group>
+                                    <field name="action" />
+                                </group>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
         </record>
-
+        
+        <!-- Action for Project Logs -->
         <record id="action_project_log" model="ir.actions.act_window">
             <field name="name">Nhật ký hoạt động</field>
             <field name="res_model">project_log</field>

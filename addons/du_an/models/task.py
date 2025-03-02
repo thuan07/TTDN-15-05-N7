@@ -5,7 +5,7 @@ class ProjectTask(models.Model):
     _description = 'Nhiệm vụ trong dự án'
 
     name = fields.Char("Tên nhiệm vụ", required=True)
-    project_id = fields.Many2one('project_management', string="Dự án")
+    project_id = fields.Many2many('project_management', string="Dự án")
     employee_id = fields.Many2many('nhan_vien', string="Nhân viên phụ trách")
     deadline = fields.Date("Hạn chót")
     status = fields.Selection([
@@ -16,6 +16,17 @@ class ProjectTask(models.Model):
 
     log_ids = fields.One2many('project_log', 'task_id', string="Nhật ký hoạt động")
 
+    progress = fields.Float("Tiến độ (%)", compute="_compute_progress", store=True)
+
+    @api.depends('status')
+    def _compute_progress(self):
+        for task in self:
+            if task.status == 'pending':
+                task.progress = 0
+            elif task.status == 'in_progress':
+                task.progress = 50
+            elif task.status == 'done':
+                task.progress = 100
     def write(self, vals):
         if 'status' in vals:
             for project in self:
@@ -29,6 +40,10 @@ class ProjectTask(models.Model):
                 self.env['project_log'].create({
                     'task_id': task.id,
                     'project_id': task.project_id.id,  # Ghi cả project_id vào log
-                    'action': f"Trạng thái nhiệm vụ thay đổi thành {new_status}",
+                    'action': f"Trạng thái nhiệm vụ {task.name} thay đổi thành {new_status}",
                 })
-        return super(ProjectTask, self).write(vals)
+        res = super(ProjectTask, self).write(vals)
+        for task in self:
+            if task.project_id:
+                task.project_id._compute_progress()
+        return res

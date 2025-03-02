@@ -14,28 +14,25 @@
             action="action_project"
         />
 
-        <menuitem
-            id="menu_task"
-            name="Quản lý Công việc"
+        <menuitem id="menu_task"
+            name="Quản lý Nhiệm vụ"
             parent="menu_project_root"
             sequence="1"
-            action="action_task"
-        />
-
-        <menuitem
+            action="action_task" />
+        <!-- <menuitem
             id="menu_employee"
             name="Quản lý Nhân viên"
             parent="menu_project_root"
             sequence="1"
             action="nhan_su.action_nhan_vien"
-        />
+        /> -->
 
-        <menuitem 
-            id="menu_project_log" 
-            name="Nhật ký hoạt động" 
+        <menuitem
+            id="menu_project_log"
+            name="Nhật ký hoạt động"
             parent="menu_project_root"
-            sequence="1" 
-            action="action_project_log" 
+            sequence="1"
+            action="action_project_log"
         />
     </data>
 </odoo>

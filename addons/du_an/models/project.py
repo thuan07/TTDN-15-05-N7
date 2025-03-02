@@ -14,11 +14,20 @@ class Project(models.Model):
         ('completed', 'Hoàn thành')
     ], string="Trạng thái", default='draft')
 
-    employee_ids = fields.Many2many("nhan_vien", string="Nhân viên tham gia")
-    task_ids = fields.One2many("project_task", "project_id", string="Danh sách nhiệm vụ")
-
+    employee_ids = fields.Many2many("nhan_vien", string="Nhân viên tham gia",)
+    task_ids = fields.Many2many("project_task", string="Danh sách nhiệm vụ")
     log_ids = fields.One2many('project_log', 'project_id', string="Nhật ký hoạt động")
 
+    progress = fields.Float("Tiến độ (%)", compute="_compute_progress", store=True)
+
+    @api.depends('task_ids.progress')
+    def _compute_progress(self):
+        for project in self:
+            if project.task_ids:
+                total_progress = sum(task.progress for task in project.task_ids)
+                project.progress = total_progress / len(project.task_ids)
+            else:
+                project.progress = 0
     def write(self, vals):
         if 'status' in vals:
             for project in self:
@@ -30,6 +39,7 @@ class Project(models.Model):
                 new_status = status_mapping.get(vals['status'], 'Không xác định')
                 self.env['project_log'].create({
                     'project_id': project.id,
-                    'action': f"Trạng thái dự án thay đổi thành {new_status}",
+                    'action': f"Trạng thái dự án {project.name} thay đổi thành {new_status}",
                 })
         return super(Project, self).write(vals)
+

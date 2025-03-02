@@ -29,6 +29,7 @@
         'views/task_view.xml',
         'views/menu.xml',
         'views/project_log_view.xml',
+        'views/resource_view.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

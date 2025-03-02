@@ -2,32 +2,46 @@
 <odoo>
     <data>
         <record id="view_project_form" model="ir.ui.view">
-            <field name="name">project_management</field>
+            <field name="name">project_management.form</field>
             <field name="model">project_management</field>
             <field name="arch" type="xml">
                 <form>
                     <sheet>
-                        <div class="oe_read_only" style="font-size:25px">Thông tin Dự Án</div>
-                        <group col="4" string="Thông tin chung">
-                            <field name="name" />
-                            <field name="description" />
-                            <field name="start_date" />
-                            <field name="end_date" />
-                            <field name="status" />
-                        </group>
-                        <group col="4" string="Nhân viên tham gia">
-                            <field name="employee_ids" widget="many2many_tags" />
-                        </group>
-                        <group col="4" string="Danh sách nhiệm vụ">
-                            <field name="task_ids" widget="one2many_list" />
-                        </group>
+                        <h1>Thông tin Dự Án</h1>
+                        <notebook>
+                            <page string="Thông tin chung">
+                                <group>
+                                    <field name="name" />
+                                    <field name="description" />
+                                    <field name="start_date" />
+                                    <field name="end_date" />
+                                    <field name="status" />
+                                </group>
+                            </page>
+                            <page string="Nhân viên tham gia">
+                                <group>
+                                    <field name="employee_ids" widget="many2many_tags" />
+                                </group>
+                            </page>
+                            <page string="Danh sách nhiệm vụ">
+                                <group>
+                                    <field name="task_ids" widget="many2many_tags" />
+                                </group>
+                            </page>
+                            <page string="Tiến độ">
+                                <group>
+                                    <separator string="Tiến độ công việc" />
+                                    <field name="progress" widget="progressbar" />
+                                </group>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
         </record>
 
         <record id="view_project_tree" model="ir.ui.view">
-            <field name="name">project_management</field>
+            <field name="name">project_management.tree</field>
             <field name="model">project_management</field>
             <field name="arch" type="xml">
                 <tree>
@@ -35,7 +49,7 @@
                     <field name="start_date" />
                     <field name="end_date" />
                     <field name="status" />
-                    <field name="employee_ids" />
+                    <field name="progress" widget="progressbar" />
                 </tree>
             </field>
         </record>
@@ -55,7 +69,6 @@
             <field name="name">Dự án</field>
             <field name="res_model">project_management</field>
             <field name="view_mode">tree,form</field>
-            <field name="search_view_id" ref="project_management_search" />
         </record>
 
     </data>

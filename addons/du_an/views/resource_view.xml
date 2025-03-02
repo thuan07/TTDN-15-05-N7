@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Menu Gốc -->
+        <menuitem id="menu_project_root" name="Quản lý Dự Án" sequence="0"/>
+
+        <!-- Action -->
+        <record id="action_resource_management" model="ir.actions.act_window">
+            <field name="name">Quản lý tài nguyên</field>
+            <field name="res_model">resource_management</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu -->
+        <menuitem id="menu_resource_management" name="Quản lý tài nguyên" parent="menu_project_root" sequence="1" action="action_resource_management"/>
+
+        <!-- Form View -->
+        <record id="view_resource_management_form" model="ir.ui.view">
+            <field name="name">resource.management.form</field>
+            <field name="model">resource_management</field>
+            <field name="arch" type="xml">
+                <form string="Quản lý tài nguyên">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <notebook>
+                            <page string="Thông tin tài nguyên">
+                                <group>
+                                    <field name="quantity"/>
+                                    <field name="description"/>
+                                </group>
+                            </page>
+                            <page string="Liên kết dự án và nhiệm vụ">
+                                <group>
+                                    <field name="project_id" widget="many2many_tags"/>
+                                    <field name="task_id" widget="many2many_tags"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record id="view_resource_management_tree" model="ir.ui.view">
+            <field name="name">resource.management.tree</field>
+            <field name="model">resource_management</field>
+            <field name="arch" type="xml">
+                <tree string="Quản lý tài nguyên">
+                    <field name="name"/>
+                    <field name="quantity"/>
+                    <field name="project_id"/>
+                    <field name="task_id"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>
