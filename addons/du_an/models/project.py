@@ -9,10 +9,10 @@ class Project(models.Model):
     start_date = fields.Date(string="Ngày bắt đầu")
     end_date = fields.Date(string="Ngày kết thúc")
     status = fields.Selection([
-        ('draft', 'Nháp'),
+        ('pending', 'Đang chờ'),
         ('in_progress', 'Đang thực hiện'),
         ('completed', 'Hoàn thành')
-    ], string="Trạng thái", default='draft')
+    ], string="Trạng thái", default='pending')
 
     employee_ids = fields.Many2many("nhan_vien", string="Nhân viên tham gia",)
     task_ids = fields.Many2many("project_task", string="Danh sách nhiệm vụ")
@@ -32,7 +32,7 @@ class Project(models.Model):
         if 'status' in vals:
             for project in self:
                 status_mapping = {
-                'draft': 'Nháp',
+                'pending': 'Đang chờ',
                 'in_progress': 'Đang thực hiện',
                 'completed': 'Hoàn thành'
                 }

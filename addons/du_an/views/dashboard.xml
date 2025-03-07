@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_project_management_kanban" model="ir.ui.view">
+        <field name="name">project.management.kanban</field>
+        <field name="model">project_management</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_view o_project_kanban">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_details">
+                                <strong><field name="name"/></strong>
+                                <div>
+                                    <span>Trạng thái:</span>
+                                    <field name="status"/>
+                                </div>
+                                <div>
+                                    <span>Tiến độ:</span>
+                                    <field name="progress" widget="progressbar"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_project_management_graph" model="ir.ui.view">
+        <field name="name">project.management.graph</field>
+        <field name="model">project_management</field>
+        <field name="arch" type="xml">
+            <graph string="Tiến độ Dự Án" type="bar">
+                <field name="name"/>
+                <field name="progress" type="measure"/>
+            </graph>
+        </field>
+    </record>
+    <record id="view_project_management_tree" model="ir.ui.view">
+        <field name="name">project.management.tree</field>
+        <field name="model">project_management</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="status"/>
+                <field name="progress"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_project_dashboard" model="ir.actions.act_window">
+        <field name="name">Dashboard</field>
+        <field name="res_model">project_management</field>
+        <field name="view_mode">kanban,tree,graph</field>
+    </record>
+
+    <menuitem id="menu_project_dashboard" name="Dashboard" parent="menu_project_root" action="action_project_dashboard"/>
+</odoo>

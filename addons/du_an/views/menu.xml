@@ -34,5 +34,13 @@
             sequence="1"
             action="action_project_log"
         />
+        <!-- <menuitem 
+            id="menu_project_dashboard"
+            name="Dashboard"
+            parent="menu_project_root"
+            sequence="1"
+            action="action_project_dashboard"
+        /> -->
+
     </data>
 </odoo>

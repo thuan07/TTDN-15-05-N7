@@ -30,6 +30,7 @@
         'views/menu.xml',
         'views/project_log_view.xml',
         'views/resource_view.xml',
+        'views/dashboard.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
