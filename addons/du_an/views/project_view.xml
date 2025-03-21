@@ -34,6 +34,21 @@
                                     <field name="progress" widget="progressbar" />
                                 </group>
                             </page>
+                            <page string="Tài chính">
+                                <group>
+                                    <field name="budget" />
+                                    <field name="actual_cost" readonly="1" />
+                                </group>
+                                <group>
+                                    <field name="invoice_ids" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="date" />
+                                            <field name="amount" />
+                                            <field name="status" />
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
                         </notebook>
                     </sheet>
                 </form>
@@ -71,5 +86,59 @@
             <field name="view_mode">tree,form</field>
         </record>
 
+        <record id="view_project_invoice_form" model="ir.ui.view">
+            <field name="name">project.invoice.form</field>
+            <field name="model">project_invoice</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_submit_for_approval" type="object" string="Gửi duyệt"
+                            states="draft" />
+                        <button name="action_approve" type="object" string="Duyệt"
+                            states="waiting_approval" groups="base.group_manager" />
+                        <button name="action_paid" type="object" string="Thanh toán"
+                            states="approved" />
+                        <button name="action_cancel" type="object" string="Hủy"
+                            states="draft,waiting_approval,approved" />
+                        <field name="status" widget="statusbar" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="project_id" />
+                            <field name="date" />
+                            <field name="status"/>
+                            <field name="amount" />
+                            <field name="description" />
+                            <field name="approved_by" readonly="1" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_project_finance_report_tree" model="ir.ui.view">
+            <field name="name">project.finance.report.tree</field>
+            <field name="model">project_finance_report</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="project_id"/>
+                    <field name="report_date"/>
+                    <field name="budget"/>
+                    <field name="actual_cost"/>
+                    <field name="profit"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action để mở danh sách báo cáo -->
+        <record id="action_project_finance_report" model="ir.actions.act_window">
+            <field name="name">Báo cáo tài chính</field>
+            <field name="res_model">project_finance_report</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu -->
+        <menuitem id="menu_project_finance" name="Quản lý Tài chính" parent="menu_project_root" sequence="2"/>
+        <menuitem id="menu_project_finance_report" name="Báo cáo tài chính" parent="menu_project_finance" action="action_project_finance_report"/>
+    
     </data>
 </odoo>

@@ -31,6 +31,7 @@
         'views/project_log_view.xml',
         'views/resource_view.xml',
         'views/dashboard.xml',
+        # 'views/project_finance_report_views.xml'
     ],
     # only loaded in demonstration mode
     'demo': [

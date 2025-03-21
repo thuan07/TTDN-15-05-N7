@@ -3,3 +3,5 @@ access_project_management,access project_management,du_an.model_project_manageme
 access_project_task,access project_task,du_an.model_project_task,base.group_user,1,1,1,1
 access_project_log,access project_log,du_an.model_project_log,base.group_user,1,1,1,1
 access_resource_management,access resource_management,du_an.model_resource_management,base.group_user,1,1,1,1
+access_project_invoice,access.project.invoice,model_project_invoice,base.group_user,1,1,1,1
+access_project_finance_report,access.project.finance.report,model_project_finance_report,base.group_user,1,1,1,1

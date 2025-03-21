@@ -14,6 +14,11 @@ class Project(models.Model):
         ('completed', 'Hoàn thành')
     ], string="Trạng thái", default='pending')
 
+    budget = fields.Float(string="Ngân sách dự án")
+    actual_cost = fields.Float(string="Chi phí thực tế", compute="_compute_actual_cost", store=True)
+    invoice_ids = fields.One2many('project_invoice', 'project_id', string="Danh sách hóa đơn")
+    finance_report_ids = fields.One2many('project_finance_report', 'project_id', string="Báo cáo tài chính")
+    
     employee_ids = fields.Many2many("nhan_vien", string="Nhân viên tham gia",)
     task_ids = fields.Many2many("project_task", string="Danh sách nhiệm vụ")
     log_ids = fields.One2many('project_log', 'project_id', string="Nhật ký hoạt động")
@@ -43,3 +48,12 @@ class Project(models.Model):
                 })
         return super(Project, self).write(vals)
 
+    @api.depends('invoice_ids.amount', 'invoice_ids.status')
+    def _compute_actual_cost(self):
+        for project in self:
+            project.actual_cost = sum(invoice.amount for invoice in project.invoice_ids if invoice.status == 'approved')
+
+    @api.depends('invoice_ids')
+    def _compute_progress(self):
+        for project in self:
+            project.progress = (sum(invoice.amount for invoice in project.invoice_ids if invoice.status == 'paid') / project.budget) * 100 if project.budget else 0

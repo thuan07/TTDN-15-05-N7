@@ -41,6 +41,5 @@
             sequence="1"
             action="action_project_dashboard"
         /> -->
-
     </data>
 </odoo>
