@@ -5,3 +5,7 @@ access_project_log,access project_log,du_an.model_project_log,base.group_user,1,
 access_resource_management,access resource_management,du_an.model_resource_management,base.group_user,1,1,1,1
 access_project_invoice,access.project.invoice,model_project_invoice,base.group_user,1,1,1,1
 access_project_finance_report,access.project.finance.report,model_project_finance_report,base.group_user,1,1,1,1
+access_resource_management,access resource_management,du_an.model_resource_management,base.group_user,1,1,1,1
+access_purchase_order,access purchase_order,du_an.model_purchase_order,base.group_user,1,1,1,1
+access_supplier_management,access supplier_management,du_an.model_supplier_management,base.group_user,1,1,1,1
+access_material_inventory,access material_inventory,du_an.model_material_inventory,base.group_user,1,1,1,1

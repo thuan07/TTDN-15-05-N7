@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <!-- Menu Gốc -->
-        <menuitem id="menu_project_root" name="Quản lý Dự Án" sequence="0"/>
+        <menuitem id="menu_project_root" name="Quản lý Dự Án" sequence="0" />
 
         <!-- Action -->
         <record id="action_resource_management" model="ir.actions.act_window">
@@ -12,7 +12,8 @@
         </record>
 
         <!-- Menu -->
-        <menuitem id="menu_resource_management" name="Quản lý tài nguyên" parent="menu_project_root" sequence="1" action="action_resource_management"/>
+        <menuitem id="menu_resource_management" name="Quản lý tài nguyên" parent="menu_project_root"
+            sequence="1" action="action_resource_management" />
 
         <!-- Form View -->
         <record id="view_resource_management_form" model="ir.ui.view">
@@ -22,22 +23,34 @@
                 <form string="Quản lý tài nguyên">
                     <sheet>
                         <div class="oe_title">
-                            <h1><field name="name"/></h1>
+                            <h1>
+                                <field name="name" />
+                            </h1>
                         </div>
                         <notebook>
                             <page string="Thông tin tài nguyên">
                                 <group>
-                                    <field name="quantity"/>
-                                    <field name="description"/>
+                                    <field name="quantity" />
+                                    <field name="description" />
+                                    <field name="supplier_id" />
+                                    <field name="state" readonly="1" />
                                 </group>
                             </page>
                             <page string="Liên kết dự án và nhiệm vụ">
                                 <group>
-                                    <field name="project_id" widget="many2many_tags"/>
-                                    <field name="task_id" widget="many2many_tags"/>
+                                    <field name="project_id" widget="many2many_tags" />
+                                    <field name="task_id" widget="many2many_tags" />
                                 </group>
                             </page>
                         </notebook>
+                        <footer>
+                            <button name="action_approve" type="object" string="Duyệt"
+                                class="btn-primary"
+                                attrs="{'invisible': [('state', '!=', 'waiting_approval')]}" />
+                            <button name="action_reject" type="object" string="Từ chối"
+                                class="btn-danger"
+                                attrs="{'invisible': [('state', '!=', 'waiting_approval')]}" />
+                        </footer>
                     </sheet>
                 </form>
             </field>
@@ -49,10 +62,12 @@
             <field name="model">resource_management</field>
             <field name="arch" type="xml">
                 <tree string="Quản lý tài nguyên">
-                    <field name="name"/>
-                    <field name="quantity"/>
-                    <field name="project_id"/>
-                    <field name="task_id"/>
+                    <field name="name" />
+                    <field name="quantity" />
+                    <field name="supplier_id" />
+                    <field name="project_id" />
+                    <field name="task_id" />
+                    <field name="state" />
                 </tree>
             </field>
         </record>

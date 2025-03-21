@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+        <!-- Tree View -->
+        <record id="view_material_inventory_tree" model="ir.ui.view">
+            <field name="name">material.inventory.tree</field>
+            <field name="model">material_inventory</field>
+            <field name="arch" type="xml">
+                <tree string="Tồn kho vật tư">
+                    <field name="product_id"/>
+                    <field name="quantity"/>
+                    <field name="location"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_material_inventory_form" model="ir.ui.view">
+            <field name="name">material.inventory.form</field>
+            <field name="model">material_inventory</field>
+            <field name="arch" type="xml">
+                <form string="Material Inventory">
+                    <sheet>
+                        <group>
+                            <field name="product_id"/>
+                            <field name="quantity"/>
+                            <field name="location"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_material_inventory" model="ir.actions.act_window">
+            <field name="name">Tồn kho vật tư</field>
+            <field name="res_model">material_inventory</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_material_inventory_tree"/>
+        </record>
+    </data>
+</odoo>

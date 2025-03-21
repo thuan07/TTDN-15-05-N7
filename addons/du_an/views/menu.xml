@@ -19,13 +19,6 @@
             parent="menu_project_root"
             sequence="1"
             action="action_task" />
-        <!-- <menuitem
-            id="menu_employee"
-            name="Quản lý Nhân viên"
-            parent="menu_project_root"
-            sequence="1"
-            action="nhan_su.action_nhan_vien"
-        /> -->
 
         <menuitem
             id="menu_project_log"
@@ -34,12 +27,34 @@
             sequence="1"
             action="action_project_log"
         />
-        <!-- <menuitem 
-            id="menu_project_dashboard"
-            name="Dashboard"
+        <menuitem
+            id="menu_purchase_root"
+            name="Quản lý Mua hàng"
             parent="menu_project_root"
+            sequence="2" />
+
+        <menuitem
+            id="menu_purchase_order"
+            name="Yêu cầu mua hàng"
+            parent="menu_purchase_root"
             sequence="1"
-            action="action_project_dashboard"
-        /> -->
+            action="action_purchase_order"
+        />
+
+        <menuitem
+            id="menu_supplier"
+            name="Quản lý Nhà cung cấp"
+            parent="menu_purchase_root"
+            sequence="2"
+            action="action_supplier"
+        />
+
+        <menuitem
+            id="menu_material_inventory"
+            name="Tồn kho vật tư"
+            parent="menu_purchase_root"
+            sequence="3"
+            action="action_material_inventory"
+        />
     </data>
 </odoo>
