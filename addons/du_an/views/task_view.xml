@@ -7,22 +7,35 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
-                        <div class="oe_read_only" style="font-size:25px; text-align:center; font-weight:bold;">Thông tin Nhiệm Vụ</div>
+                        <div class="oe_button_box" name="buttons" style="margin-bottom: 15px;">
+                            <button name="action_approve" type="object" string="Xác nhận"
+                                class="btn-primary"
+                                attrs="{'invisible': [('status', '!=', 'pending')]}" />
+                            <button name="action_complete" type="object" string="Hoàn thành"
+                                class="btn-success"
+                                attrs="{'invisible': [('status', '!=', 'in_progress')]}" />
+                        </div>
+                        <div class="oe_read_only"
+                            style="font-size:25px; text-align:center; font-weight:bold;">Thông tin
+                            Nhiệm Vụ</div>
                         <notebook>
                             <page string="Chi tiết nhiệm vụ">
                                 <group>
-                                    <field name="name"/>
-                                    <field name="project_id" widget="many2many_tags"/>
-                                    <field name="employee_id" widget="many2many_tags"/>
-                                    <field name="deadline"/>
-                                    <field name="status"/>
+                                    <field name="name" />
+                                    <field name="project_id" />
+                                    <field name="employee_id" widget="many2many_tags" />
+                                    <field name="deadline" />
+                                    <field name="status" widget="statusbar" readonly="1" />
                                 </group>
                             </page>
-                            <page string="Tiến độ công việc">
+                            <!-- <page string="Tiến độ công việc">
                                 <group>
-                                    <separator string="Tiến độ công việc"/>
-                                    <field name="progress" widget="progressbar"/>
+                                    <separator string="Tiến độ công việc" />
+                                    <field name="progress" widget="progressbar" />
                                 </group>
+                            </page> -->
+                            <page string="Tài nguyên">
+                                <field name="resource_ids" widget="many2many_tags" options="{'no_create': False}" />
                             </page>
                         </notebook>
                     </sheet>
@@ -35,22 +48,24 @@
             <field name="model">project_task</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name="name"/>
-                    <field name="project_id"/>
-                    <field name="employee_id"/>
-                    <field name="deadline"/>
-                    <field name="status"/>
+                    <field name="name" />
+                    <field name="project_id" />
+                    <field name="employee_id" />
+                    <field name="deadline" />
+                    <field name="status" widget="statusbar" />
+                    <field name="progress" widget="progressbar" />
                 </tree>
             </field>
         </record>
+
 
         <record model="ir.ui.view" id="project_task_search">
             <field name="model">project_task</field>
             <field name="arch" type="xml">
                 <search>
-                    <field name="name"/>
-                    <field name="status"/>
-                    <field name="employee_id"/>
+                    <field name="name" />
+                    <field name="status" />
+                    <field name="employee_id" />
                 </search>
             </field>
         </record>
@@ -59,7 +74,7 @@
             <field name="name">Nhiệm vụ</field>
             <field name="res_model">project_task</field>
             <field name="view_mode">tree,form</field>
-            <field name="search_view_id" ref="project_task_search"/>
+            <field name="search_view_id" ref="project_task_search" />
         </record>
     </data>
 </odoo>

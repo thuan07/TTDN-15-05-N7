@@ -1,0 +1,124 @@
+<odoo>
+    <data>
+        <!-- Tree View cho Báo cáo Tiến độ Dự án -->
+        <record id="project_progress_tree_view" model="ir.ui.view">
+            <field name="name">project.progress.tree</field>
+            <field name="model">project_management</field>
+            <field name="arch" type="xml">
+                <tree string="Danh sách Dự án">
+                    <field name="name" string="Tên dự án" />
+                    <field name="progress" string="Tiến độ (%)" />
+                    <field name="status" string="Trạng thái" />
+                    <field name="budget" string="Ngân sách" />
+                    <field name="actual_cost" string="Chi phí thực tế" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Graph View cho Tiến độ Dự án -->
+        <record id="project_progress_graph_view" model="ir.ui.view">
+            <field name="name">project.progress.graph</field>
+            <field name="model">project_management</field>
+            <field name="arch" type="xml">
+                <graph string="Tiến độ Dự án" type="bar">
+                    <field name="name" type="row" string="Tên dự án" />
+                    <field name="progress" type="measure" string="Tiến độ (%)" />
+                </graph>
+            </field>
+        </record>
+
+        <!-- Pivot View cho Phân tích Chi phí và Lợi nhuận -->
+        <record id="project_finance_pivot_view" model="ir.ui.view">
+            <field name="name">project.finance.pivot</field>
+            <field name="model">project_finance_report</field>
+            <field name="arch" type="xml">
+                <pivot string="Phân tích Tài chính Dự án">
+                    <field name="project_id" type="row" string="Dự án" />
+                    <field name="budget" type="measure" string="Ngân sách" />
+                    <field name="actual_cost" type="measure" string="Chi phí thực tế" />
+                    <field name="profit" type="measure" string="Lợi nhuận" />
+                </pivot>
+            </field>
+        </record>
+
+        <!-- Kanban View cho Dashboard -->
+        <record id="view_project_management_kanban" model="ir.ui.view">
+            <field name="name">project.management.kanban</field>
+            <field name="model">project_management</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="o_kanban_record">
+                                <div class="o_kanban_details">
+                                    <strong>
+                                        <field name="name" />
+                                    </strong>
+                                    <div>
+                                        <span>Trạng thái:</span>
+                                        <field name="status" />
+                                    </div>
+                                    <div>
+                                        <span>Tiến độ:</span>
+                                        <field name="progress" widget="progressbar" />
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- KPI Cards -->
+        <template id="project_kpi_template">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Tổng Ngân Sách</h5>
+                            <p class="card-text">
+                                <t t-esc="total_budget" />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Tổng Chi Phí Thực Tế</h5>
+                            <p class="card-text">
+                                <t t-esc="total_actual_cost" />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Tổng Lợi Nhuận</h5>
+                            <p class="card-text">
+                                <t t-esc="total_profit" />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- Action mở Dashboard -->
+        <record id="action_project_dashboard" model="ir.actions.act_window">
+            <field name="name">Dashboard Dự Án</field>
+            <field name="res_model">project_management</field>
+            <field name="view_mode">kanban,graph,pivot</field>
+        </record>
+
+
+        <!-- Menu mở Dashboard -->
+        <!-- <menuitem id="menu_dashboard"
+            name="Phân tích và Báo cáo"
+            parent="menu_project_root"
+            sequence="1"
+            action="action_project_dashboard_client"/> -->
+    </data>
+</odoo>

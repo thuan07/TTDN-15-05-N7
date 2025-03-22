@@ -20,6 +20,12 @@
             sequence="1"
             action="action_task" />
 
+        <menuitem id="menu_dashboard"
+            name="Phân tích và Báo cáo"
+            parent="menu_project_root"
+            sequence="1"
+            action="action_project_dashboard"/>
+
         <menuitem
             id="menu_project_log"
             name="Nhật ký hoạt động"

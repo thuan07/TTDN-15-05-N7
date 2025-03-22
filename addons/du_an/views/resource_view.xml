@@ -65,11 +65,39 @@
                     <field name="name" />
                     <field name="quantity" />
                     <field name="supplier_id" />
-                    <field name="project_id" />
-                    <field name="task_id" />
-                    <field name="state" />
+                    <field name="project_id"/>
+                    <field name="task_id"/>
+                    <field name="state" widget="statusbar"/>
                 </tree>
             </field>
         </record>
+        <record id="view_resource_management_kanban" model="ir.ui.view">
+            <field name="name">resource.management.kanban</field>
+            <field name="model">resource_management</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card">
+                                <div class="o_kanban_details">
+                                    <strong>
+                                        <field name="name" />
+                                    </strong>
+                                    <div>
+                                        <span>Số lượng:</span>
+                                        <field name="quantity" />
+                                    </div>
+                                    <div>
+                                        <span>Trạng thái:</span>
+                                        <field name="state" widget="statusbar" />
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
     </data>
 </odoo>

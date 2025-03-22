@@ -9,7 +9,7 @@
                     <field name="name" />
                     <field name="supplier_id" />
                     <field name="order_date" />
-                    <field name="state" />
+                    <field name="state" widget="statusbar"/>
                     <field name="resource_id" /> <!-- Hiển thị tài nguyên liên quan -->
                 </tree>
             </field>
@@ -26,9 +26,8 @@
                             <field name="name" />
                             <field name="supplier_id" />
                             <field name="order_date" />
-                            <field name="state" readonly="1" />
-                            <field name="resource_id" readonly="1" />  <!-- Hiển thị tài nguyên liên
-                            quan -->
+                            <field name="state" readonly="1" widget="statusbar"/>
+                            <field name="resource_id" readonly="1" />  
                         </group>
                         <notebook>
                             <page string="Chi tiết đơn hàng">

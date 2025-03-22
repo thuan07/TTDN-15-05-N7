@@ -46,11 +46,13 @@ class ProjectInvoice(models.Model):
             invoice.approved_by = self.env.user
 
     def action_paid(self):
-        """Đánh dấu hóa đơn đã thanh toán"""
+        """Đánh dấu hóa đơn là đã thanh toán và cập nhật chi phí thực tế của dự án"""
         for invoice in self:
             if invoice.status != 'approved':
-                raise ValidationError("Hóa đơn phải được duyệt trước khi thanh toán!")
+                raise ValidationError("Chỉ có thể thanh toán hóa đơn đã được duyệt!")
             invoice.status = 'paid'
+            if invoice.project_id:
+                invoice.project_id.actual_cost += invoice.amount
 
     def action_cancel(self):
         """Hủy hóa đơn"""

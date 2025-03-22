@@ -9,8 +9,9 @@ class Resource(models.Model):
     quantity = fields.Integer(string='Số lượng sản phẩm')
     description = fields.Text(string='Mô tả')
 
-    project_id = fields.Many2many('project_management', string='Dự án')
-    task_id = fields.Many2many('project_task', string='Công việc')
+    project_id = fields.Many2many('project_management', string='Dự án', ondelete='cascade')
+    task_id = fields.Many2many('project_task', string='Công việc', ondelete='cascade')
+
     purchase_order_ids = fields.One2many('purchase_order', 'resource_id', string="Yêu cầu mua hàng liên quan")
     supplier_id = fields.Many2one('supplier_management', string='Nhà cung cấp', ondelete='set null')
     state = fields.Selection([

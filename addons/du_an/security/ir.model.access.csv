@@ -9,3 +9,4 @@ access_resource_management,access resource_management,du_an.model_resource_manag
 access_purchase_order,access purchase_order,du_an.model_purchase_order,base.group_user,1,1,1,1
 access_supplier_management,access supplier_management,du_an.model_supplier_management,base.group_user,1,1,1,1
 access_material_inventory,access material_inventory,du_an.model_material_inventory,base.group_user,1,1,1,1
+access_project_progress_report,access_project_progress_report,model_project_progress_report,,1,1,1,1

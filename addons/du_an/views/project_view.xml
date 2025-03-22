@@ -7,15 +7,25 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
-                        <h1>Thông tin Dự Án</h1>
+                        <div class="oe_button_box" name="buttons">
+                            <button name="action_approve" type="object" string="Duyệt"
+                                class="btn-primary" />
+                            <button name="action_complete" type="object" string="Hoàn thành"
+                                class="btn-success" />
+                        </div>
+                        <h1 class="o_form_title">Thông tin Dự Án</h1>
                         <notebook>
                             <page string="Thông tin chung">
                                 <group>
-                                    <field name="name" />
-                                    <field name="description" />
-                                    <field name="start_date" />
-                                    <field name="end_date" />
-                                    <field name="status" />
+                                    <group>
+                                        <field name="name" placeholder="Tên dự án..." />
+                                        <field name="description" placeholder="Mô tả dự án..." />
+                                    </group>
+                                    <group>
+                                        <field name="start_date" />
+                                        <field name="end_date" />
+                                        <field name="status" readonly="1" />
+                                    </group>
                                 </group>
                             </page>
                             <page string="Nhân viên tham gia">
@@ -28,12 +38,12 @@
                                     <field name="task_ids" widget="many2many_tags" />
                                 </group>
                             </page>
-                            <page string="Tiến độ">
+                            <!-- <page string="Tiến độ">
                                 <group>
                                     <separator string="Tiến độ công việc" />
-                                    <field name="progress" widget="progressbar" />
+                                    <field name="progress" />
                                 </group>
-                            </page>
+                            </page> -->
                             <page string="Tài chính">
                                 <group>
                                     <field name="budget" />
@@ -49,6 +59,9 @@
                                     </field>
                                 </group>
                             </page>
+                            <page string="Tài nguyên">
+                                <field name="resource_ids" widget="many2many_tags" options="{'no_create': False}" />
+                            </page>
                         </notebook>
                     </sheet>
                 </form>
@@ -59,31 +72,27 @@
             <field name="name">project_management.tree</field>
             <field name="model">project_management</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree decoration-info="status == 'completed'"
+                    decoration-danger="status == 'pending'">
                     <field name="name" />
-                    <field name="start_date" />
-                    <field name="end_date" />
-                    <field name="status" />
+                    <field name="start_date" string="Ngày bắt đầu" />
+                    <field name="end_date" string="Ngày kết thúc" />
+                    <field name="status" widget="statusbar" />
                     <field name="progress" widget="progressbar" />
                 </tree>
             </field>
         </record>
+
 
         <record model="ir.ui.view" id="project_management_search">
             <field name="model">project_management</field>
             <field name="arch" type="xml">
                 <search>
                     <field name="name" />
-                    <field name="status" />
+                    <field name="status" widget="statusbar" />
                     <field name="employee_ids" />
                 </search>
             </field>
-        </record>
-
-        <record id="action_project" model="ir.actions.act_window">
-            <field name="name">Dự án</field>
-            <field name="res_model">project_management</field>
-            <field name="view_mode">tree,form</field>
         </record>
 
         <record id="view_project_invoice_form" model="ir.ui.view">
@@ -106,7 +115,7 @@
                         <group>
                             <field name="project_id" />
                             <field name="date" />
-                            <field name="status"/>
+                            <field name="status" />
                             <field name="amount" />
                             <field name="description" />
                             <field name="approved_by" readonly="1" />
@@ -115,19 +124,84 @@
                 </form>
             </field>
         </record>
+        <record id="view_project_finance_report_form" model="ir.ui.view">
+            <field name="name">project.finance.report.form</field>
+            <field name="model">project_finance_report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_approve" type="object" string="Duyệt"
+                            class="btn-primary"
+                            attrs="{'invisible': [('status', '!=', 'draft')]}" />
+                        <button name="action_paid" type="object" string="Thanh toán"
+                            class="btn-success"
+                            attrs="{'invisible': [('status', '!=', 'approved')]}" />
+                        <button name="action_cancel" type="object" string="Hủy" class="btn-danger"
+                            attrs="{'invisible': [('status', 'in', ('paid', 'canceled'))]}" />
+                        <field name="status" widget="statusbar" readonly="1" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="project_id" />
+                            <field name="report_date" />
+                            <field name="budget" readonly="1" />
+                            <field name="actual_cost" readonly="1" />
+                            <field name="status" readonly="1" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
         <record id="view_project_finance_report_tree" model="ir.ui.view">
             <field name="name">project.finance.report.tree</field>
             <field name="model">project_finance_report</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name="project_id"/>
-                    <field name="report_date"/>
-                    <field name="budget"/>
-                    <field name="actual_cost"/>
-                    <field name="profit"/>
+                    <field name="project_id" />
+                    <field name="report_date" />
+                    <field name="budget" />
+                    <field name="actual_cost" />
+                    <field name="status" widget="statusbar" />
                 </tree>
             </field>
         </record>
+        <record id="view_project_management_kanban" model="ir.ui.view">
+            <field name="name">project.management.kanban</field>
+            <field name="model">project_management</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_view o_project_kanban">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_details">
+                                    <strong>
+                                        <field name="name" />
+                                    </strong>
+                                    <div>
+                                        <span>Trạng thái:</span>
+                                        <field name="status" />
+                                    </div>
+                                    <div>
+                                        <span>Tiến độ:</span>
+                                        <field name="progress" widget="progressbar" />
+                                    </div>
+                                    <div>
+                                        <span>Ngày bắt đầu:</span>
+                                        <field name="start_date" />
+                                    </div>
+                                    <div>
+                                        <span>Ngày kết thúc:</span>
+                                        <field name="end_date" />
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
 
         <!-- Action để mở danh sách báo cáo -->
         <record id="action_project_finance_report" model="ir.actions.act_window">
@@ -137,8 +211,16 @@
         </record>
 
         <!-- Menu -->
-        <menuitem id="menu_project_finance" name="Quản lý Tài chính" parent="menu_project_root" sequence="2"/>
-        <menuitem id="menu_project_finance_report" name="Báo cáo tài chính" parent="menu_project_finance" action="action_project_finance_report"/>
-    
+        <menuitem id="menu_project_finance" name="Quản lý Tài chính" parent="menu_project_root"
+            sequence="2" />
+        <menuitem id="menu_project_finance_report" name="Báo cáo tài chính"
+            parent="menu_project_finance" action="action_project_finance_report" />
+
+        <record id="action_project" model="ir.actions.act_window">
+            <field name="name">Dự án</field>
+            <field name="res_model">project_management</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
     </data>
 </odoo>

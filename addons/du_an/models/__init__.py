@@ -7,3 +7,4 @@ from . import resource
 from . import project_finance_report
 from . import project_invoice
 from . import purchase
+from . import project_analysis
